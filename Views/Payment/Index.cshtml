@@ -1,0 +1,99 @@
+@model HealthcareShoppingCart.Models.PaymentViewModel
+@{
+    ViewData["Title"] = "Payment Gateway";
+}
+
+<div class="page-header mb-4">
+    <h1 class="display-5 fw-bold text-primary">Payment Gateway</h1>
+    <p class="lead text-muted">Complete your purchase securely.</p>
+</div>
+
+<div class="row">
+    <div class="col-lg-7">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Payment Details</h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="Process" method="post">
+                    @Html.AntiForgeryToken()
+
+                    <div class="mb-3">
+                        <label asp-for="CardholderName" class="form-label"></label>
+                        <input asp-for="CardholderName" class="form-control" placeholder="John Doe" />
+                        <span asp-validation-for="CardholderName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="CardNumber" class="form-label"></label>
+                        <input asp-for="CardNumber" class="form-control" placeholder="1234567890123456" maxlength="16" />
+                        <span asp-validation-for="CardNumber" class="text-danger small"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="ExpiryDate" class="form-label"></label>
+                            <input asp-for="ExpiryDate" class="form-control" placeholder="MM/YY" maxlength="5" />
+                            <span asp-validation-for="ExpiryDate" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="CVV" class="form-label"></label>
+                            <input asp-for="CVV" class="form-control" placeholder="123" maxlength="4" />
+                            <span asp-validation-for="CVV" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" placeholder="you@example.com" />
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+
+                    <div class="payment-icons d-flex gap-3 mb-4 text-muted">
+                        <span class="payment-badge">VISA</span>
+                        <span class="payment-badge">Mastercard</span>
+                        <span class="payment-badge">AMEX</span>
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-lg w-100">
+                        Pay $@Model.TotalAmount.ToString("F2")
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Order Review</h5>
+            </div>
+            <div class="card-body">
+                @foreach (var item in Model.CartItems)
+                {
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="@item.ImageUrl" alt="@item.ProductName" class="payment-item-image rounded me-3" />
+                        <div class="flex-grow-1">
+                            <div class="fw-semibold">@item.ProductName</div>
+                            <small class="text-muted">Qty: @item.Quantity &times; $@item.Price.ToString("F2")</small>
+                        </div>
+                        <strong>$@item.Subtotal.ToString("F2")</strong>
+                    </div>
+                }
+                <hr />
+                <div class="d-flex justify-content-between">
+                    <strong>Total</strong>
+                    <strong class="text-primary fs-5">$@Model.TotalAmount.ToString("F2")</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="secure-badge mt-3 text-center text-muted small">
+            🔒 Secured with 256-bit SSL encryption
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

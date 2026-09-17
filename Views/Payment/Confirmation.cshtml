@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Order Confirmed";
+    var orderId = TempData["OrderId"]?.ToString();
+    var paidAmount = TempData["PaidAmount"]?.ToString();
+    var customerEmail = TempData["CustomerEmail"]?.ToString();
+}
+
+<div class="confirmation-page text-center py-5">
+    <div class="confirmation-icon mb-4">✅</div>
+    <h1 class="display-5 fw-bold text-success mb-3">Payment Successful!</h1>
+    <p class="lead text-muted mb-4">Thank you for your purchase. Your healthcare order has been confirmed.</p>
+
+    <div class="card shadow-sm mx-auto confirmation-card">
+        <div class="card-body p-4">
+            <div class="row text-start">
+                <div class="col-sm-6 mb-3">
+                    <small class="text-muted">Order ID</small>
+                    <div class="fw-bold">@orderId</div>
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <small class="text-muted">Amount Paid</small>
+                    <div class="fw-bold text-primary">$@paidAmount</div>
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <small class="text-muted">Confirmation Email</small>
+                    <div class="fw-bold">@customerEmail</div>
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <small class="text-muted">Estimated Delivery</small>
+                    <div class="fw-bold">3-5 Business Days</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a asp-controller="Products" asp-action="Index" class="btn btn-primary btn-lg mt-4">
+        Continue Shopping
+    </a>
+</div>

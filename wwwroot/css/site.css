@@ -1,0 +1,369 @@
+:root {
+  --healthcare-primary: #0d6efd;
+  --healthcare-secondary: #20c997;
+  --healthcare-dark: #1a2b4a;
+  --healthcare-light: #f0f7ff;
+}
+
+html {
+  font-size: 14px;
+  position: relative;
+  min-height: 100%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+  margin-bottom: 0;
+  background-color: var(--healthcare-light);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar */
+.healthcare-navbar {
+  background: linear-gradient(135deg, var(--healthcare-dark) 0%, #2c5282 100%);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.healthcare-navbar .navbar-brand {
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+}
+
+.brand-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: var(--healthcare-secondary);
+  border-radius: 50%;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.cart-link {
+  position: relative;
+}
+
+.cart-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--healthcare-secondary);
+  color: #fff;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+/* Product Cards */
+.product-card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12) !important;
+}
+
+.product-image-wrapper {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+.category-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.price-tag {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--healthcare-primary);
+}
+
+.qty-input {
+  width: 60px;
+  text-align: center;
+}
+
+/* Cart */
+.cart-item-card {
+  border: none;
+  border-radius: 12px;
+}
+
+.cart-item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.order-summary {
+  border: none;
+  border-radius: 12px;
+  position: sticky;
+  top: 20px;
+}
+
+.empty-cart-icon {
+  font-size: 4rem;
+}
+
+/* Payment */
+.payment-item-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.payment-badge {
+  background: #e9ecef;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.secure-badge {
+  padding: 12px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+/* Confirmation */
+.confirmation-page {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.confirmation-icon {
+  font-size: 4rem;
+}
+
+.confirmation-card {
+  max-width: 500px;
+}
+
+/* Footer */
+.healthcare-footer {
+  background: var(--healthcare-dark);
+  color: #adb5bd;
+  margin-top: auto;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+.page-header {
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 1rem;
+}
+
+/* Chatbot floating widget */
+.chat-widget {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1050;
+}
+
+.chat-toggle-btn {
+  width: 58px;
+  height: 58px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--healthcare-primary) 0%, #2c5282 100%);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(13, 110, 253, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.chat-toggle-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(13, 110, 253, 0.5);
+}
+
+.chat-icon,
+.chat-icon-close {
+  width: 26px;
+  height: 26px;
+}
+
+.chat-popup {
+  position: absolute;
+  right: 0;
+  bottom: 72px;
+  width: 340px;
+  max-width: calc(100vw - 32px);
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: chatSlideUp 0.25s ease;
+}
+
+@keyframes chatSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chat-popup-header {
+  background: linear-gradient(135deg, var(--healthcare-dark) 0%, #2c5282 100%);
+  color: #fff;
+  padding: 12px 14px;
+}
+
+.chat-provider-switch {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chat-provider-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.chat-provider-options {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.chat-provider-btn {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.chat-provider-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.chat-provider-btn.active {
+  background: #fff;
+  color: var(--healthcare-dark);
+  border-color: #fff;
+  font-weight: 600;
+}
+
+.chat-close-btn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  line-height: 1;
+  border-radius: 50%;
+  font-size: 1.2rem;
+}
+
+.chatbot-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  font-size: 1.2rem;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 280px;
+  max-height: 280px;
+  overflow-y: auto;
+  background: #f8fbff;
+}
+
+.chat-bubble {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.chat-bubble.bot {
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-bottom-left-radius: 4px;
+}
+
+.chat-bubble.user {
+  background: var(--healthcare-primary);
+  color: #fff;
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-bubble.typing {
+  color: #6c757d;
+  font-style: italic;
+}
+
+.chat-input-area {
+  background: #fff;
+}
+

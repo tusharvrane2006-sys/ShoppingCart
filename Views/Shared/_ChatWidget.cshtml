@@ -1,0 +1,43 @@
+<div id="chatWidget" class="chat-widget">
+    <div id="chatPopup" class="chat-popup d-none" aria-hidden="true">
+        <div class="chat-popup-header">
+            <div class="d-flex align-items-center gap-2 flex-grow-1">
+                <span class="chatbot-avatar">🤖</span>
+                <div class="flex-grow-1">
+                    <strong>HealthCare Assistant</strong>
+                    <div id="chatProviderLabel" class="small text-white-50">Provider: Google Gemini</div>
+                </div>
+                <button type="button" id="chatCloseBtn" class="btn btn-sm btn-light chat-close-btn" aria-label="Close chat">&times;</button>
+            </div>
+            <div class="chat-provider-switch mt-2">
+                <span class="chat-provider-title">AI Provider</span>
+                <div id="chatProviderOptions" class="chat-provider-options" role="group" aria-label="Select AI provider">
+                    <button type="button" class="chat-provider-btn active" data-provider="google">Google Gemini</button>
+                    <button type="button" class="chat-provider-btn" data-provider="cursor">Cursor Agent</button>
+                    <button type="button" class="chat-provider-btn" data-provider="ollama">Ollama (Local)</button>
+                </div>
+            </div>
+        </div>
+        <div id="chatMessages" class="chat-messages p-3">
+            <div class="chat-bubble bot">
+                Hello! I can help you choose healthcare products, explain items in your cart, or answer checkout questions. How can I help you today?
+            </div>
+        </div>
+        <div class="chat-input-area border-top p-2">
+            <form id="chatForm" class="d-flex gap-2">
+                <input type="text" id="chatInput" class="form-control form-control-sm" placeholder="Type your message..." autocomplete="off" maxlength="500" />
+                <button type="submit" id="chatSendBtn" class="btn btn-primary btn-sm px-3">Send</button>
+            </form>
+            <div id="chatError" class="text-danger small mt-1 d-none"></div>
+        </div>
+    </div>
+
+    <button type="button" id="chatToggleBtn" class="chat-toggle-btn" aria-label="Open chat assistant" aria-expanded="false">
+        <svg class="chat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/>
+        </svg>
+        <svg class="chat-icon-close d-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+    </button>
+</div>

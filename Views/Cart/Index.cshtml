@@ -1,0 +1,105 @@
+@model List<HealthcareShoppingCart.Models.CartItem>
+@{
+    ViewData["Title"] = "Shopping Cart";
+    var total = (decimal)ViewBag.Total;
+}
+
+<div class="page-header mb-4">
+    <h1 class="display-5 fw-bold text-primary">Your Cart</h1>
+    <p class="lead text-muted">Review your selected healthcare products before checkout.</p>
+</div>
+
+@if (TempData["SuccessMessage"] is string successMessage)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @successMessage
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (!Model.Any())
+{
+    <div class="empty-cart text-center py-5">
+        <div class="empty-cart-icon mb-3">🛒</div>
+        <h3>Your cart is empty</h3>
+        <p class="text-muted">Browse our healthcare products and add items to your cart.</p>
+        <a asp-controller="Products" asp-action="Index" class="btn btn-primary btn-lg mt-3">Shop Products</a>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-lg-8">
+            @foreach (var item in Model)
+            {
+                <div class="card cart-item-card mb-3 shadow-sm">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-2 col-4">
+                                <img src="@item.ImageUrl" alt="@item.ProductName" class="cart-item-image rounded" />
+                            </div>
+                            <div class="col-md-4 col-8">
+                                <h5 class="mb-1">@item.ProductName</h5>
+                                <p class="text-muted mb-0">$@item.Price.ToString("F2") each</p>
+                            </div>
+                            <div class="col-md-3 col-6 mt-2 mt-md-0">
+                                <form asp-action="UpdateQuantity" method="post" class="d-flex align-items-center gap-2">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="productId" value="@item.ProductId" />
+                                    <label class="form-label mb-0 small">Qty:</label>
+                                    <input type="number" name="quantity" value="@item.Quantity" min="1" max="10"
+                                           class="form-control form-control-sm qty-input"
+                                           onchange="this.form.submit()" />
+                                </form>
+                            </div>
+                            <div class="col-md-2 col-3 mt-2 mt-md-0 text-md-end">
+                                <strong class="text-primary">$@item.Subtotal.ToString("F2")</strong>
+                            </div>
+                            <div class="col-md-1 col-3 mt-2 mt-md-0 text-end">
+                                <form asp-action="Remove" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="productId" value="@item.ProductId" />
+                                    <button type="submit" class="btn btn-outline-danger btn-sm" title="Remove item">&times;</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <form asp-action="Clear" method="post" class="mt-2">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-outline-secondary btn-sm">Clear Cart</button>
+            </form>
+        </div>
+
+        <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="card order-summary shadow">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Order Summary</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Items (@Model.Sum(i => i.Quantity))</span>
+                        <span>$@total.ToString("F2")</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Shipping</span>
+                        <span class="text-success">Free</span>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-between mb-3">
+                        <strong>Total</strong>
+                        <strong class="text-primary fs-5">$@total.ToString("F2")</strong>
+                    </div>
+                    <a asp-controller="Payment" asp-action="Index" class="btn btn-primary w-100 btn-lg">
+                        Proceed to Payment
+                    </a>
+                    <a asp-controller="Products" asp-action="Index" class="btn btn-outline-secondary w-100 mt-2">
+                        Continue Shopping
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
