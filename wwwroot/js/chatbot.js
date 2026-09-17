@@ -18,7 +18,7 @@
     }
 
     const welcomeMessage =
-        "Hello! I can help you choose healthcare products, explain items in your cart, or answer checkout questions. How can I help you today?";
+        "Hello! Thank you for reaching out today. I can help with products, orders, payments, shipping, and your shopping cart. How may I help you with your shopping experience?";
 
     const histories = {};
     const providerLabels = {};
